@@ -86,30 +86,30 @@
    (python-mode . python-ts-mode)))
 ;;; Code
 ;;;; Completion
-(use-package! corfu
-  ;; Optional customizations
-  ;; :custom
-  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  ;; (corfu-auto t)                 ;; Enable auto completion
-  ;; (corfu-separator ?\s)          ;; Orderless field separator
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+;; (use-package! corfu
+;;   ;; Optional customizations
+;;   ;; :custom
+;;   ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+;;   ;; (corfu-auto t)                 ;; Enable auto completion
+;;   ;; (corfu-separator ?\s)          ;; Orderless field separator
+;;   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+;;   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+;;   ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+;;   ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+;;   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+;;   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
 
-  ;; Enable Corfu only for certain modes.
-  ;; :hook ((prog-mode . corfu-mode)
-  ;;        (shell-mode . corfu-mode)
-  ;;        (eshell-mode . corfu-mode))
+;;   ;; Enable Corfu only for certain modes.
+;;   ;; :hook ((prog-mode . corfu-mode)
+;;   ;;        (shell-mode . corfu-mode)
+;;   ;;        (eshell-mode . corfu-mode))
 
-  ;; Recommended: Enable Corfu globally.
-  ;; This is recommended since Dabbrev can be used globally (M-/).
-  ;; See also `corfu-exclude-modes'.
-  :init
-  (setq corfu-auto t)
-  (global-corfu-mode))
+;;   ;; Recommended: Enable Corfu globally.
+;;   ;; This is recommended since Dabbrev can be used globally (M-/).
+;;   ;; See also `corfu-exclude-modes'.
+;;   :init
+;;   (setq corfu-auto t)
+;;   (global-corfu-mode))
 ;;;; Snippets
 (setq yas--default-user-snippets-dir (concat doom-private-dir "/snippets"))
 ;;;; Languages
@@ -120,3 +120,32 @@
 ;;; Org Mode
 ;;;; Roam
 (setq org-roam-directory (file-truename "~/org-roam"))
+;;; Movement
+;;;; Bindings
+(map! :map global-map "C-t" 'transpose-chars)
+(map! :map global-map "M-c" 'capitalize-dwim)
+(map! :map global-map "M-C" 'capitalize-word)
+
+(map! :leader
+      :desc "Ace window" "w w" #'ace-window
+      :desc "Yank link"  "s y" #'link-hint-copy-link
+      ;; Define custom leaders
+      (:prefix-map ("e" . "main")
+       :desc "Expand abbrev"         "a" #'expand-abbrev
+       :desc "Kill matching buffers" "bk" #'kill-matching-buffers
+       :desc "Org Drill"             "d" #'org-drill
+       :desc "Roam id"               "q" #'roam-id-from-title
+       :desc "Git Link"              "gl" #'git-link
+       :desc "Pomodoro"              "p" #'org-pomodoro
+       :desc "Query-replace"         "r" #'anzu-query-replace
+       :desc "Query-replace RegExp"  "R" #'anzu-query-replace-regexp
+       :desc "Occur"                 "o" #'occur
+       :desc "Indent rigidly"        "TAB" #'indent-rigidly
+       :desc "Law address"           "ml" #'law-address
+       :desc "Narrow to region"      "nr" #'narrow-to-region
+       :desc "Narrow to page"        "np" #'narrow-to-page
+       :desc "Narrow to defun"       "nd" #'narrow-to-defun
+       :desc "Widen"                 "nw" #'widen
+       :desc "Browse kill ring"      "y" #'browse-kill-ring
+       :desc "Dedicate window"       "wd" #'toggle-current-window-dedication
+       :desc "Setxkbmap"             "x" #'setxkbmap))

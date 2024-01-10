@@ -48,3 +48,10 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+;;; Completion and Search
+(package! corfu)
+(package! consult-lsp)
+(package! embark)
+(package! marginalia)
+(package! orderless)
