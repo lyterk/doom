@@ -80,10 +80,10 @@
   :config)
 ;;; Tree-sitter
 (setq major-mode-remap-alist
- '((typescript-mode . typescript-ts-mode)
-   (json-mode . json-ts-mode)
-   (rustic-mode . rust-ts-mode)
-   (python-mode . python-ts-mode)))
+      '((typescript-mode . typescript-ts-mode)
+        (json-mode . json-ts-mode)
+        (rustic-mode . rust-ts-mode)
+        (python-mode . python-ts-mode)))
 ;;; Code
 ;;;; Completion
 ;; (use-package! corfu
@@ -118,6 +118,7 @@
 (setq org-babel-python-command "python3")
 (setq dap-python-debugger "debugpy")
 ;;; Org Mode
+(setq org-log-done 'time)
 ;;;; Roam
 (setq org-roam-directory (file-truename "~/org-roam"))
 ;;; Movement
