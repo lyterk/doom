@@ -29,6 +29,7 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
+;;; Themes and Display
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -42,6 +43,24 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org-roam/")
 
+;; Transparency
+(set-frame-parameter (selected-frame) 'alpha '93)
+(add-to-list 'default-frame-alist '(alpha . 93))
+
+(setq calendar-latitude 47.5
+      calendar-longitude -122.3
+      circadian-themes '((:sunrise . doom-one-light)
+                         (:sunset . doom-nova)))
+
+;; Dark all the time
+;; (setq calendar-latitude 47.5
+;;       calendar-longitude -122.3
+;;       circadian-themes '((:sunrise . doom-nova)
+;;                          (:sunset . doom-nova)))
+
+(use-package! circadian
+  :defer t
+  :init (circadian-setup))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -74,17 +93,37 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;;; Debugger
+
+;;; Planning
+(setq tmr-sound-file "~/Sound/meditation/bell.wav")
+;;; Shells
+(setq vterm-shell "/usr/bin/fish")
+;;; Requires
+;; (require 'exec-path-from-shell)
+;;; Code
+;;;; Debuggers
 (use-package! dap-mode
   :defer t
   :config)
-;;; Tree-sitter
+;;;;; Python
+(use-package!
+    python
+  :config
+  (require 'dap-python)
+  (dap-register-debug-template
+   "Python :: Run unittest (buffer)"
+   (list
+    :type "python"
+    :args ""
+    :cwd "${workspaceFolder}"
+    :module "unittest"
+    :request "launch"
+    :name "Python :: Run unittest (buffer)")))
+;;;; Tree-sitter
 (setq major-mode-remap-alist
       '((typescript-mode . typescript-ts-mode)
         (json-mode . json-ts-mode)
-        (rustic-mode . rust-ts-mode)
         (python-mode . python-ts-mode)))
-;;; Code
 ;;;; Completion
 ;; (use-package! corfu
 ;;   ;; Optional customizations
@@ -113,10 +152,18 @@
 ;;;; Snippets
 (setq yas--default-user-snippets-dir (concat doom-private-dir "/snippets"))
 ;;;; Languages
+;;;;; Flutter Dev
+;;;;;; Arb
+(use-package! js-json-mode
+  :mode "\\.arb"
+  :mode "\\.json"
+  :mode "\\.jsonl")
 ;;;;; Python
 (setq python-shell-interpreter "python3")
 (setq org-babel-python-command "python3")
 (setq dap-python-debugger "debugpy")
+;;;;; Nix
+(setq lsp-nix-nil-server-path "~/.nix-profile/bin/nil")
 ;;; Org Mode
 (setq org-log-done 'time)
 ;;;; Roam
@@ -126,6 +173,10 @@
 (map! :map global-map "C-t" 'transpose-chars)
 (map! :map global-map "M-c" 'capitalize-dwim)
 (map! :map global-map "M-C" 'capitalize-word)
+
+(map! :map org-mode-map
+      "C-c C-r" 'verb-send-request-on-point-other-window-stay)
+
 
 (map! :leader
       :desc "Ace window" "w w" #'ace-window
@@ -147,6 +198,12 @@
        :desc "Narrow to page"        "np" #'narrow-to-page
        :desc "Narrow to defun"       "nd" #'narrow-to-defun
        :desc "Widen"                 "nw" #'widen
+       :desc "Start Timer"           "ts" #'tmr-with-details
+       :desc "Timer Tabulated"       "tt" #'tmr-tabulated-view
        :desc "Browse kill ring"      "y" #'browse-kill-ring
        :desc "Dedicate window"       "wd" #'toggle-current-window-dedication
        :desc "Setxkbmap"             "x" #'setxkbmap))
+;;; Security
+;;;; SSH
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
