@@ -41,7 +41,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org-roam/")
+(setq org-directory "~/org")
 
 ;; Transparency
 (set-frame-parameter (selected-frame) 'alpha '93)
@@ -167,7 +167,7 @@
 ;;; Org Mode
 (setq org-log-done 'time)
 ;;;; Roam
-(setq org-roam-directory (file-truename "~/org-roam"))
+(setq org-roam-directory (file-truename "~/org"))
 ;;; Movement
 ;;;; Bindings
 (map! :map global-map "C-t" 'transpose-chars)
