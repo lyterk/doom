@@ -56,14 +56,24 @@
 (package! marginalia)
 (package! orderless)
 
-(package! exec-path-from-shell)
+;; (package! exec-path-from-shell)
+(package! keychain-environment)
 
 (package! rainbow-mode)
 (package! verb)
 (package! org-drill)
+
+(package! elixir-ts-mode)
+(package! exunit)
+(package! flycheck-credo)
+
+(package! dired-hacks)
 
 (package! circadian)
 (package! tmr)
 (package! outli
   :recipe (:host github :repo "jdtsmith/outli"))
 (package! yasnippet-snippets)
+
+;; fonts & icons
+(package! all-the-icons)

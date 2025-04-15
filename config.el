@@ -44,8 +44,8 @@
 (setq org-directory "~/org")
 
 ;; Transparency
-(set-frame-parameter (selected-frame) 'alpha '93)
-(add-to-list 'default-frame-alist '(alpha . 93))
+(set-frame-parameter (selected-frame) 'alpha '70)
+(add-to-list 'default-frame-alist '(alpha . 70))
 
 (setq calendar-latitude 47.5
       calendar-longitude -122.3
@@ -97,14 +97,24 @@
 ;;; Planning
 (setq tmr-sound-file "~/Sound/meditation/bell.wav")
 ;;; Shells
-(setq vterm-shell "/usr/bin/fish")
+(setq vterm-shell "/home/lyterk/.nix-profile/bin/fish")
 ;;; Requires
 ;; (require 'exec-path-from-shell)
 ;;; Code
+;;;; LSP
+;; (use-package! lsp
+;;   :commands (lsp lsp-deferred))
 ;;;; Debuggers
 (use-package! dap-mode
   :defer t
   :config)
+;;;;; Elixir
+;; (use-package! elixir-ts-mode
+;;   :after lsp-mode
+;;   :mode (("\\.ex\\'" . elixir-ts-mode)
+;;          ("\\.exs\\'" . elixir-ts-mode)
+;;          ("\\.heex.html\\'" . heex-ts-mode)))
+
 ;;;;; Python
 (use-package!
     python
@@ -119,11 +129,17 @@
     :module "unittest"
     :request "launch"
     :name "Python :: Run unittest (buffer)")))
+;;;;; Rust
+(setq lsp-rust-analyzer-store-path "/home/lyterk/.nix-profile/bin/rust-analyzer")
+;;;;; cpp
+(setq lsp-clangd-binary-path "/home/lyterk/.nix-profile/bin/clangd"
+      lsp-clients--clangd-default-executable "/home/lyterk/.nix-profile/bin/clangd")
 ;;;; Tree-sitter
-(setq major-mode-remap-alist
-      '((typescript-mode . typescript-ts-mode)
-        (json-mode . json-ts-mode)
-        (python-mode . python-ts-mode)))
+;;;; Maybe necessary later
+;; (setq major-mode-remap-alist
+;;       '((typescript-mode . typescript-ts-mode)
+;;         (json-mode . json-ts-mode)
+;;         (python-mode . python-ts-mode)))
 ;;;; Completion
 ;; (use-package! corfu
 ;;   ;; Optional customizations
@@ -205,5 +221,5 @@
        :desc "Setxkbmap"             "x" #'setxkbmap))
 ;;; Security
 ;;;; SSH
-(exec-path-from-shell-copy-env "SSH_AGENT_PID")
-(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+;; (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+;; (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
