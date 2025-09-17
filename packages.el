@@ -77,3 +77,7 @@
 
 ;; fonts & icons
 (package! all-the-icons)
+(package! dirvish)
+
+(package! copilot)
+(package! copilot-chat)

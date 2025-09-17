@@ -114,7 +114,6 @@
 ;;   :mode (("\\.ex\\'" . elixir-ts-mode)
 ;;          ("\\.exs\\'" . elixir-ts-mode)
 ;;          ("\\.heex.html\\'" . heex-ts-mode)))
-
 ;;;;; Python
 (use-package!
     python
@@ -189,6 +188,7 @@
 (map! :map global-map "C-t" 'transpose-chars)
 (map! :map global-map "M-c" 'capitalize-dwim)
 (map! :map global-map "M-C" 'capitalize-word)
+(map! :map global-map "M-<Tab>" 'copilot-accept-completion)
 
 (map! :map org-mode-map
       "C-c C-r" 'verb-send-request-on-point-other-window-stay)
