@@ -21,8 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+;; (setq doom-font (font-spec :family "JetBrains Mono" :size 12 :weight 'semi-light)
+;;      doom-variable-pitch-font (font-spec :family "Sans" :size 14))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -109,11 +109,11 @@
   :defer t
   :config)
 ;;;;; Elixir
-;; (use-package! elixir-ts-mode
-;;   :after lsp-mode
-;;   :mode (("\\.ex\\'" . elixir-ts-mode)
-;;          ("\\.exs\\'" . elixir-ts-mode)
-;;          ("\\.heex.html\\'" . heex-ts-mode)))
+(use-package! elixir-ts-mode
+  :after lsp-mode
+  :mode (("\\.ex\\'" . elixir-ts-mode)
+         ("\\.exs\\'" . elixir-ts-mode)
+         ("\\.heex.html\\'" . heex-ts-mode)))
 ;;;;; Python
 (use-package!
     python
@@ -208,6 +208,8 @@
        :desc "Query-replace"         "r" #'anzu-query-replace
        :desc "Query-replace RegExp"  "R" #'anzu-query-replace-regexp
        :desc "Occur"                 "o" #'occur
+       :desc "GPT Menu"              "im" #'gptel-menu
+       :desc "GPT Send"              "is" #'gptel-send
        :desc "Indent rigidly"        "TAB" #'indent-rigidly
        :desc "Law address"           "ml" #'law-address
        :desc "Narrow to region"      "nr" #'narrow-to-region
@@ -223,3 +225,12 @@
 ;;;; SSH
 ;; (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 ;; (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
+(use-package! gptel
+  :config 
+  (setq gptel-model 'claude-sonnet-4-6
+        gptel-backend
+        (gptel-make-anthropic "Claude"
+          :stream t
+          :key (lambda ()
+                 (auth-source-pass-get 'secret "Comp/AI/claude.ai")))))
