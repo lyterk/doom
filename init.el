@@ -91,7 +91,7 @@
        ;;collab            ; buffers with friends
        (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        direnv
-       docker
+       ;; docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
@@ -105,7 +105,7 @@
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
-       terraform         ; infrastructure as code
+       ;; terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
        tree-sitter       ; syntax and parsing, sitting in a tree...
        ;;upload            ; map local to remote projects via ssh/ftp
@@ -149,11 +149,11 @@
        (javascript +lsp +tree-sitter)        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;(kotlin +lsp)            ; a better, slicker Java(Script)
-       latex             ; writing papers in Emacs has never been so fun
+       ;; latex             ; writing papers in Emacs has never been so fun
        ;;lean              ; for folks with too much to prove
        ;;ledger            ; be audit you can be
-       ;;lua               ; one-based indices? one-based indices
-       markdown            ; writing docs for people to ignore
+       (lua +lsp +tree-sitter)               ; one-based indices? one-based indices
+       ;; markdown            ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        (nix +lsp)               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
@@ -171,7 +171,7 @@
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       (rust +lsp)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp +tree-sitter)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;; (scala +lsp)        ; java, but good
        ;;(scheme +guile)   ; a fully conniving family of lisps
        (sh +fish)          ; she sells {ba,z,fi}sh shells on the C xor

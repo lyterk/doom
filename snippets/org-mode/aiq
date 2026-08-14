@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: ai-query
+# uuid: 
+# key: aiq
+# condition: t
+# --
+* $1
+`(let ((id (org-id-get-create))))`
+#+BEGIN_QUOTE
+$2
+#+END_QUOTE
+** Response :ai:
+`(let ((id (org-id-get-create))))`
+$0

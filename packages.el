@@ -69,7 +69,7 @@
 
 (package! dired-hacks)
 
-(package! circadian)
+;; (package! circadian)
 (package! tmr)
 (package! outli
   :recipe (:host github :repo "jdtsmith/outli"))
@@ -80,3 +80,7 @@
 (package! dirvish)
 
 (package! gptel)
+(package! mermaid-mode)
+(package! ob-mermaid)
+(package! direnv)
+(package! journalctl-mode)
